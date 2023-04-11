@@ -58,7 +58,6 @@ lines = [line.translate(str.maketrans('', '', string.punctuation))
 # tokenize
 lines = [word_tokenize(line) for line in lines]
 
-
 def remove_stopwords(lines, sw=sw):
     '''
     The purpose of this function is to remove stopwords from a given array of 
@@ -89,7 +88,7 @@ filtered_lines = remove_stopwords(lines=lines, sw=sw)
 # ---------------------------------------------
 
 w = w2v(
-    filtered_lines,
+    lines,
     min_count=3,  
     sg = 1,       
     window=7      
@@ -107,7 +106,7 @@ print(emb_df.shape)
 emb_df.head()
 
 # ---------------------------------------------
-#                GENERATE PCA
+#             GENERATE PCA IMG
 # ---------------------------------------------
 
 pca = PCA(n_components=2, random_state=7)

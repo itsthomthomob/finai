@@ -25,3 +25,6 @@ An AI-powered finance tool.
 Initialized the FinAI project. Created a Next.JS application with Create Next App, installed dependencies: Material-UI, Mui Icons, Pinecone, Redux, and others. Downloaded training data based on tweets and labels from [this 'twitter financial news' dataset](https://www.kaggle.com/datasets/sulphatet/twitter-financial-news?resource=download).
 
 Studied/investigated a bit on Word2Vec, a training model to generate embedded words for vector values. [This medium article](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) was very useful in explaining W2V works.
+
+Generated a vector chart of each word, the closer each point is the closer the actual meaning of the word is
+![Chart](https://raw.githubusercontent.com/itsthomthomob/finai/main/process_data/Figure_2.png?token=GHSAT0AAAAAAB5Z2JOZCAGM7GWSVXFD5ZD6ZBV2IQQ)
