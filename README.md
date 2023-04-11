@@ -12,3 +12,15 @@ An AI-powered finance tool.
 2. Open terminal, ``cd`` into folder with repo
 3. Run ``npm install``
 4. Run ``npm run dev``
+
+### Technologies Used
+- Next.JS (front end and back end)
+- Material UI (for styling and UI consistency)
+- Pinecone (for vector databases)
+
+### Development Log
+
+**April 11**
+Initialized the FinAI project. Created a Next.JS application with Create Next App, installed dependencies: Material-UI, Mui Icons, Pinecone, Redux, and others. Downloaded training data based on tweets and labels from [this 'twitter financial news' dataset](https://www.kaggle.com/datasets/sulphatet/twitter-financial-news?resource=download).
+
+Studied/investigated a bit on Word2Vec, a training model to generate embedded words for vector values. [This medium article](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) was very useful in explaining W2V works.
