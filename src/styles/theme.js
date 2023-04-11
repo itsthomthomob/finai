@@ -5,16 +5,23 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
     palette: {
         primary: {
-          main: "#FFA07A",
+            main: "#FFA07A", // Light Coral
+        },
+        secondary: {
+            main: "#1E90FF", // Dodger Blue
+            light: "#7FFF00", // Chartreuse
+            dark: "#A9A9A9", // Dark Gray
         },
         background: {
-          default: "#1B1B37",
+            default: "#1B1B37", // Dark Blue
         },
         text: {
-          primary: "#FDEDEF",
-          secondary: "#E6E6E6",
+            primary: "#FDEDEF",
+            secondary: "#E6E6E6",
         },
-      },
+        contrastThreshold: 3,
+        tonalOffset: 0.2,
+    },
     typography: {
         logo: {
             fontSize: "48px",
@@ -24,7 +31,7 @@ const theme = createTheme({
         },
         subheader: {
             fontSize: "28px",
-        }
-    }
+        },
+    },
 });
 export default theme;

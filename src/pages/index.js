@@ -1,37 +1,52 @@
 import React from "react";
 import { useState } from "react";
 
-import { Box, Typography, Button } from "@mui/material";
+import {
+    Box,
+    Typography,
+    Button,
+    Card,
+    CardContent,
+    Grid,
+} from "@mui/material";
+
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 export default function Home() {
     const [getMessage, setMessage] = useState("Loading...");
     const [getData, setData] = useState("Loading...");
 
     let ResponseInfo = () => {
+        if (getData === "Loading...") {
+            return (
+                <Typography sx={{ color: "white" }}>Loading Data...</Typography>
+            );
+        } else {
+            let name = formatIndexName(getData.database.name);
 
-      if(getData === "Loading..."){
-        return ( 
-          <Typography sx={{color: "white"}}>
-            Loading Data...
-          </Typography>
-         );
-      }
-      else{
-        return ( 
-          <Box>
-            <Typography>
-              {getData.database.name}
-            </Typography>
-            <Typography>
-              Status: 
-            </Typography>
-            <Typography>
-              {getData.status.state}
-            </Typography>
-          </Box>
-         );
-      }
+            return (
+                <Grid spacing={2} direction="row">
+                    <Grid item>
+                        <Typography>{name}</Typography>
+                    </Grid>
+                    <Grid item sx={{display: "flex"}}>
+                        <Typography sx={{marginRight: 1}}>Status:</Typography>
+                        <Typography color="secondary.light">
+                            {getData.status.state}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            );
+        }
+    };
 
+    // formatIndexName
+    // - Helper function, formats index name correctly
+    function formatIndexName(indexName) {
+        return indexName
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
     }
 
     async function onGetStatus() {
@@ -55,10 +70,9 @@ export default function Home() {
 
             setMessage(resJSON.message);
 
-            let indexData = resJSON.indexData
+            let indexData = resJSON.indexData;
 
-            setData(indexData)
-
+            setData(indexData);
         } else {
             setMessage("Fetch error.");
         }
@@ -76,8 +90,13 @@ export default function Home() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    m: 5
                 }}>
-                <Typography variant="logo">FinAI</Typography>
+                <Typography
+                    variant="logo"
+                    color="secondary">
+                    FinAI
+                </Typography>
             </Box>
             <Box
                 sx={{
@@ -111,22 +130,18 @@ export default function Home() {
                     alignItems: "center",
                     m: 3,
                 }}>
-                <Typography
+                <Card
                     sx={{
-                        textAlign: "center",
-                    }}
-                    variant="subheader">
-                    {getMessage}
-                </Typography>
-            </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    m: 3,
-                }}>
-                <ResponseInfo/>
+                        backgroundColor: "#1E90FF",
+                        width: 300
+                    }}>
+                    <CardContent>
+                        <Typography variant="subheader">
+                            Database Status
+                        </Typography>
+                        <ResponseInfo />
+                    </CardContent>
+                </Card>
             </Box>
         </Box>
     );
