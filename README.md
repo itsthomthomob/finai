@@ -18,6 +18,16 @@ An AI-powered finance tool.
 - Material UI (for styling and UI consistency)
 - Pinecone (for vector databases)
 
+### Planned Features
+- Public Features
+  - Stock Market Sentiment Analysis
+  - Stock Ticker Price Prediction
+  - AI-Powered Budgeting
+- Enterprise Features (Still considering)
+  - Financial Risk Analysis
+  - Fraud Detection (Transactions, Hidden Expenses)
+  - Corporate Risk Assessments
+
 ### Development Log
 
 **April 11**
