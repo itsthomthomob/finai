@@ -36,5 +36,8 @@ Initialized the FinAI project. Created a Next.JS application with Create Next Ap
 
 Studied/investigated a bit on Word2Vec, a training model to generate embedded words for vector values. [This medium article](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) was very useful in explaining W2V works.
 
-Generated a vector chart of each word, the closer each point is the closer the actual meaning of the word is
+Generated a vector chart of each word, the closer each point is the closer the actual meaning of the word is.
+
 ![Chart](https://raw.githubusercontent.com/itsthomthomob/finai/main/process_data/word_clusters.png)
+
+This chart was generated from over 10,000 tweets consiting of 100,000+ words from each tweet. Each word is vectorized, pushed together according to similarlity, then clustered into their respective categories detailed on the key table.
