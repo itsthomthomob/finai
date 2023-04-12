@@ -15,6 +15,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 export default function Home() {
     const [getMessage, setMessage] = useState("Loading...");
     const [getData, setData] = useState("Loading...");
+    const [getSentiment, setSentiment] = useState("Unsure");
 
     let ResponseInfo = () => {
         if (getData === "Loading...") {
@@ -115,9 +116,11 @@ export default function Home() {
                     alignItems: "center",
                 }}>
                 <Button
+                    variant="outlined"
                     sx={{
-                        width: "25%",
+                        width: "40%",
                         m: 3,
+                        marginTop: 4
                     }}
                     onClick={onGetStatus}>
                     Get Status
@@ -133,13 +136,49 @@ export default function Home() {
                 <Card
                     sx={{
                         backgroundColor: "#1E90FF",
-                        width: 300
+                        width: "75%",
+                        p: 1
                     }}>
                     <CardContent>
                         <Typography variant="subheader">
                             Database Status
                         </Typography>
                         <ResponseInfo />
+                    </CardContent>
+                </Card>
+            </Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    m: 3,
+                }}>
+                <Card
+                    sx={{
+                        backgroundColor: "#1E90FF",
+                        width: "75%",
+                        p: 1
+                    }}>
+                    <CardContent>
+                        <Grid sx={{display: "flex", direction: "column"}}>
+                            <Grid item xs={6} sx={{m: 1}}>
+                                <Typography variant="subheader">
+                                    Current Market Sentiment
+                                </Typography>
+                                <Typography color="secondary.light">
+                                    {getSentiment}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6} sx={{m: 1}}>
+                                <Typography variant="subheader">
+                                    Twitter Bot Status
+                                </Typography>
+                                <Typography color="secondary.light">
+                                    {getSentiment}
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </CardContent>
                 </Card>
             </Box>

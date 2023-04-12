@@ -30,7 +30,9 @@ const theme = createTheme({
             fontSize: "32px",
         },
         subheader: {
-            fontSize: "28px",
+            fontSize: "18px",
+            fontWeight: "bold",
+            letterSpacing: 2
         },
     },
 });
