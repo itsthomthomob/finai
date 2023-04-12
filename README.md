@@ -41,3 +41,8 @@ Generated a vector chart of each word, the closer each point is the closer the a
 ![Chart](https://raw.githubusercontent.com/itsthomthomob/finai/main/process_data/word_clusters.png)
 
 This chart was generated from over 10,000 tweets consiting of 100,000+ words from each tweet. Each word is vectorized, pushed together according to similarlity, then clustered into their respective categories detailed on the key table.
+
+X-axis: first highest variance
+Y-axis: 2nd highest variance
+
+Variance in terms of differentiation of each word.
