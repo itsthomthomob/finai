@@ -8,14 +8,21 @@ import {
     Card,
     CardContent,
     Grid,
+    TextField,
 } from "@mui/material";
 
 import RefreshIcon from "@mui/icons-material/Refresh";
 
 export default function Home() {
     const [getMessage, setMessage] = useState("Loading...");
+
     const [getData, setData] = useState("Loading...");
+
     const [getSentiment, setSentiment] = useState("Unsure");
+
+    const [getQuery, setQuery] = useState();
+
+    const [getQueryData, setQueryData] = useState("Loading...");
 
     let ResponseInfo = () => {
         if (getData === "Loading...") {
@@ -26,12 +33,16 @@ export default function Home() {
             let name = formatIndexName(getData.database.name);
 
             return (
-                <Grid spacing={2} direction="row">
+                <Grid
+                    spacing={2}
+                    direction="row">
                     <Grid item>
                         <Typography>{name}</Typography>
                     </Grid>
-                    <Grid item sx={{display: "flex"}}>
-                        <Typography sx={{marginRight: 1}}>Status:</Typography>
+                    <Grid
+                        item
+                        sx={{ display: "flex" }}>
+                        <Typography sx={{ marginRight: 1 }}>Status:</Typography>
                         <Typography color="secondary.light">
                             {getData.status.state}
                         </Typography>
@@ -79,6 +90,32 @@ export default function Home() {
         }
     }
 
+    async function onGetQuery() {
+        let payload = {
+            query: getQuery,
+        };
+
+        let JSONdata = JSON.stringify(payload);
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSONdata,
+        };
+
+        let endpoint = "/api/pinecone/query";
+
+        let res = await fetch(endpoint, options);
+        if (res) {
+            let resJSON = await res.json();
+            console.log(JSON.stringify(resJSON.message));
+        } else {
+            console.log("Error: ", req);
+        }
+    }
+
     return (
         <Box
             sx={{
@@ -91,7 +128,7 @@ export default function Home() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    m: 5
+                    m: 5,
                 }}>
                 <Typography
                     variant="logo"
@@ -114,71 +151,81 @@ export default function Home() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                }}>
-                <Button
-                    variant="outlined"
-                    sx={{
-                        width: "40%",
-                        m: 3,
-                        marginTop: 4
-                    }}
-                    onClick={onGetStatus}>
-                    Get Status
-                </Button>
-            </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    m: 3,
-                }}>
-                <Card
-                    sx={{
-                        backgroundColor: "#1E90FF",
-                        width: "75%",
-                        p: 1
-                    }}>
-                    <CardContent>
-                        <Typography variant="subheader">
-                            Database Status
-                        </Typography>
-                        <ResponseInfo />
-                    </CardContent>
-                </Card>
-            </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    m: 3,
-                }}>
-                <Card
-                    sx={{
-                        backgroundColor: "#1E90FF",
-                        width: "75%",
-                        p: 1
-                    }}>
-                    <CardContent>
-                        <Grid sx={{display: "flex", direction: "column"}}>
-                            <Grid item xs={6} sx={{m: 1}}>
-                                <Typography variant="subheader">
-                                    Current Market Sentiment
-                                </Typography>
-                                <Typography color="secondary.light">
-                                    {getSentiment}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={6} sx={{m: 1}}>
-                                <Typography variant="subheader">
-                                    Twitter Bot Status
-                                </Typography>
-                                <Typography color="secondary.light">
-                                    {getSentiment}
-                                </Typography>
-                            </Grid>
+                }}></Box>
+            <Box>
+                <Grid
+                    direction={"column"}
+                    alignItems={"center"}
+                    container
+                    rowSpacing={4}
+                    columns={2}>
+                    <Grid
+                        item
+                        sx={{ display: "flex", flexDirection: "column" }}>
+                        <Grid
+                            item
+                            sx={{
+                                marginTop: 4,
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: 'center',
+                                textAlign: 'left'
+                            }}>
+                            <Typography variant="subheader">
+                                Database Status
+                            </Typography>
+                            <ResponseInfo />
                         </Grid>
+                        <Button
+                            variant="outlined"
+                            sx={{
+                                marginTop: 4,
+                                width: "14rem",
+                            }}
+                            onClick={onGetStatus}>
+                            Get Status
+                        </Button>
+                    </Grid>
+                    <Grid
+                        item
+                        sx={{ display: "flex", flexDirection: "column" }}>
+                        <TextField
+                            sx={{ backgroundColor: "#676778", width: "100%" }}
+                            variant="filled"
+                            value={getQuery}
+                            onChange={(e) => {
+                                setQuery(e.target.value);
+                            }}
+                        />
+                        <Button
+                            variant="outlined"
+                            sx={{
+                                width: "100%",
+                                marginTop: 2,
+                            }}
+                            onClick={onGetQuery}>
+                            Get Query
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    m: 3,
+                }}>
+                <Card
+                    sx={{
+                        backgroundColor: "#1E90FF",
+                        width: "40%",
+                        p: 1,
+                    }}>
+                    <CardContent>
+                        <Typography>Results</Typography>
+                        <Typography>{getQueryData}</Typography>
                     </CardContent>
                 </Card>
             </Box>
