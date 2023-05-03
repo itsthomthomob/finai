@@ -4,7 +4,7 @@ import string
 
 # print("Preparing Search For: " + sys.argv[1])
 
-# import numpy as np
+import numpy as np
 import pandas as pd
 
 import matplotlib.pyplot as plt
@@ -30,7 +30,7 @@ import os
 # ---------------------------------------------
 
 # constants
-PATH = 'C:/Users/Thomas/Desktop/Projects/FinAI/finai/process_data/data/tweets.json'
+PATH = 'C:/Users/Thomas/Desktop/Projects/FinAI/finai/src/pages/api/pinecone/data/tweets.json'
 sw = stopwords.words('english')
 
 with open(PATH, encoding='utf-8') as f:
@@ -102,10 +102,6 @@ words_df['label'] = tweet_labels[valid_tweet_indices]
 # ---------------------------------------------
 #               RETURN DATA
 # ---------------------------------------------
-
-def QueryConnect():
-    print("Called Query.")
-QueryConnect()
 
 # ---------------------------------------------
 #               CREATE GRAPH
