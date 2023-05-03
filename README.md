@@ -1,24 +1,41 @@
 # FinAI
-An AI-powered finance tool.
+An AI-powered financial analysis tool.
 
 ## Getting Started
 
-### Pre Reqs
+## Pre Reqs
 - Node (Versions after v16)
 - NPM
+- Python 3.10
+- Pip
 
-### Set-up
+## Required Pip Modules
+- Pandas `pip install pandas`
+- NumPy `pip install numpy`
+- Matplot library `pip install matplotlib`
+   - used to create graphs
+- Natural Language Toolkit `pip install nltk`
+- scikit `pip install scikit-learn`
+   - "A set of python modules for machine learning and data mining"
+- gensim `pip install gensim`
+   - "Gensim is a Python library for topic modelling, document indexing and similarity retrieval with large corpora. "
+
+## Change Paths!
+- Change path on line 33 in process.py to your local path
+
+## Set-up Front End Environment
 1. Clone repo into a separate folder
 2. Open terminal, ``cd`` into folder with repo
 3. Run ``npm install``
-4. Run ``npm run dev``
+4. Run ``npm run dev`` (optional)
 
-### Technologies Used
+## Technologies Used
 - Next.JS (front end and back end)
+- Python (for upserting and graphs)
 - Material UI (for styling and UI consistency)
 - Pinecone (for vector databases)
 
-### Planned Features
+### Planned Features (future of this project)
 - Public Features
   - Stock Market Sentiment Analysis
   - Stock Ticker Price Prediction
@@ -46,3 +63,7 @@ X-axis: first highest variance
 Y-axis: 2nd highest variance
 
 Variance in terms of differentiation of each word.
+
+### References
+
+Dataset from https://www.kaggle.com/datasets/sulphatet/twitter-financial-news?resource=download
