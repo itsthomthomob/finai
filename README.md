@@ -1,11 +1,13 @@
 # FinAI
-An AI-powered finance tool.
+An AI-powered financial analysis tool.
 
 ## Getting Started
 
 ## Pre Reqs
 - Node (Versions after v16)
 - NPM
+- Python 3.10
+- Pip
 
 ## Required Pip Modules
 - Pandas `pip install pandas`
@@ -17,6 +19,9 @@ An AI-powered finance tool.
    - "A set of python modules for machine learning and data mining"
 - gensim `pip install gensim`
    - "Gensim is a Python library for topic modelling, document indexing and similarity retrieval with large corpora. "
+
+## Change Paths!
+- Change path on line 33 in process.py to your local path
 
 ## Set-up Front End Environment
 1. Clone repo into a separate folder
