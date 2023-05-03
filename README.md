@@ -58,3 +58,7 @@ X-axis: first highest variance
 Y-axis: 2nd highest variance
 
 Variance in terms of differentiation of each word.
+
+### References
+
+Dataset from https://www.kaggle.com/datasets/sulphatet/twitter-financial-news?resource=download
