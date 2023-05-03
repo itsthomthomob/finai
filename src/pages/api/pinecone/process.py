@@ -2,11 +2,9 @@ import sys
 import json
 import string
 
-# !!! CHANGE TO YOUR PATH !!! #
-sys.path.append("\Users\Thomas\AppData\Local\Programs\Python\Python310\Lib\site-packages")
+# print("Preparing Search For: " + sys.argv[1])
 
-
-import numpy as np
+# import numpy as np
 import pandas as pd
 
 import matplotlib.pyplot as plt
@@ -73,27 +71,6 @@ with open(PATH, encoding='utf-8') as f:
 tokenized_tweets = [word_tokenize(tweet.lower()) for tweet in set(tweets)]
 w2v_model = Word2Vec(tokenized_tweets, min_count=3, sg=1, window=7)
 
-def VectorizeQuery(query):
-    # # Preprocess query text (e.g., remove stop words, punctuation, etc.)
-    # # ...
-    
-    # # Split query into words
-    # words = query.split()
-    
-    # # Vectorize each word in query using Word2Vec model
-    # word_vectors = []
-    # for word in words:
-    #     if word in w2v_model.vocab:
-    #         word_vectors.append(w2v_model[word])
-            
-    # # Compute the mean vector of all word vectors to get a single vector for the entire query
-    # if len(word_vectors) > 0:
-    #     query_vector = np.mean(word_vectors, axis=0)
-    # else:
-    #     query_vector = np.zeros(w2v_model.vector_size)
-        
-    print("Called VectorizeQuery.")
-
 print("Applied World2Vec model.")
 
 valid_tweet_indices = [i for i, tweet in enumerate(tokenized_tweets) if any(word in w2v_model.wv.key_to_index for word in tweet)]
@@ -121,6 +98,14 @@ print("PCA WV: " + str(len(pca_word_vectors)))
 # create DataFrame with word vectors and their corresponding labels
 words_df = pd.DataFrame(pca_word_vectors, index=[valid_tweets[i] for i in range(len(valid_tweet_indices))], columns=['x', 'y'])
 words_df['label'] = tweet_labels[valid_tweet_indices]
+
+# ---------------------------------------------
+#               RETURN DATA
+# ---------------------------------------------
+
+def QueryConnect():
+    print("Called Query.")
+QueryConnect()
 
 # # ---------------------------------------------
 # #               CREATE GRAPH

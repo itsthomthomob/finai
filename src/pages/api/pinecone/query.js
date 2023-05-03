@@ -1,58 +1,74 @@
 import { PineconeClient } from "@pinecone-database/pinecone";
-const { spawn } = require('node:child_process');
-
 
 export default async function handler(req, res) {
-
     let queryData = req.body.query;
-    let vectorizedData;
 
-    // TODO: Change so it's adjusted locally
-    let pathToProcess = 'src/pages/api/pinecone/process.py'
+    // The following is grabbed from https://winkjs.org/wink-nlp/getting-started.html
 
-    // Spawn a python process using Node child process
-    const pythonProcess = spawn('python', [pathToProcess, queryData]);
+    // Load wink-nlp package.
+    const winkNLP = require("wink-nlp");
 
-    // Calls the VectorizeQuery method in process.py
-    pythonProcess.stdout.on('data', (data) => {
-        const vectorizedQuery = data.toString().trim();
-        console.log(vectorizedQuery);
-    });
+    // Load english language model — light version.
+    const model = require("wink-eng-lite-web-model");
 
-    // Catch any errors if they exist
-    pythonProcess.stderr.on('data', (data) => {
-        console.error(`stderr: ${data}`);
-    });
+    // Load BM25 Vectorizer
+    const BM25Vectorizer = require("wink-nlp/utilities/bm25-vectorizer");
 
-    // Close the python process
-    pythonProcess.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
-    });
+    // Instantiate winkNLP.
+    const nlp = winkNLP(model);
 
-    // Pinecone client
+    // Obtain "its" helper to extract item properties.
+    const its = nlp.its;
+
+    // Obtain "as" reducer helper to reduce a collection.
+    const as = nlp.as;
+
+    // Instantiate a vectorizer with the default configuration — no input config
+    // parameter indicates use default.
+    const bm25 = BM25Vectorizer();
+
+    // Returns the vector of "queryData"
+    console.log("Learning: " + queryData);
+    bm25.learn(nlp.readDoc(queryData).tokens().out(its.normal));
+    let vectorizedQueryData = bm25.vectorOf(
+        nlp.readDoc(queryData).tokens().out(its.normal)
+    );
+
+    for (let index = 0; index < 99; index++) {
+        vectorizedQueryData.push(vectorizedQueryData[0])
+    }
+
+    console.log("Vector: ", vectorizedQueryData.length);
+
+    // Pinecone clients
     const pinecone = new PineconeClient();
 
-    // Get body request
-    // TODO
-    
     try {
-        
         // Initialize pinecone client
         await pinecone.init({
             environment: process.env.PINECONE_ENVIRONMENT,
             apiKey: process.env.PINECONE_API_KEY,
         });
-        
+
         // Set index we query from
         let indexName = "financial-news";
-        
+
         // Pinecone index
         const index = pinecone.Index({ indexName });
+        
+        const queryResponse = await index.query({
+            query: {
+              vector: [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+              topK: 3,
+              includeValues: true,
+            },
+        });
 
-        let payload = {}
+        console.log("Query Results \n" + JSON.stringify(queryResponse));
+
+        let payload = {};
 
         res.status(200).json(payload);
-
     } catch (error) {
         console.log(error);
 

@@ -91,6 +91,9 @@ export default function Home() {
     }
 
     async function onGetQuery() {
+
+        console.log("Sending: " + getQuery);
+
         let payload = {
             query: getQuery,
         };
@@ -108,6 +111,7 @@ export default function Home() {
         let endpoint = "/api/pinecone/query";
 
         let res = await fetch(endpoint, options);
+
         if (res) {
             let resJSON = await res.json();
             console.log(JSON.stringify(resJSON.message));
