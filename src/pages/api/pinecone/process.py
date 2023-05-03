@@ -159,8 +159,8 @@ plt.legend(handles=handles, title="Labels", bbox_to_anchor=(1.00, 1), loc='upper
 plt.title('Word Clusters by Label')
 plt.xlabel('PCA-1')
 plt.ylabel('PCA-2')
-plt.savefig('C:/Users/Thomas/Desktop/Projects/FinAI/finai/process_data/word_clusters.png')
-# plt.show()
+# plt.savefig('C:/Users/Thomas/Desktop/Projects/FinAI/finai/process_data/word_clusters.png')
+plt.show()
 
 # # ---------------------------------------------
 # #            PINECONE UPSERTING
