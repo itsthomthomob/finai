@@ -107,64 +107,64 @@ def QueryConnect():
     print("Called Query.")
 QueryConnect()
 
-# # ---------------------------------------------
-# #               CREATE GRAPH
-# # ---------------------------------------------
+# ---------------------------------------------
+#               CREATE GRAPH
+# ---------------------------------------------
 
-# # get the unique labels
-# unique_labels = set(tweet_labels)
+# get the unique labels
+unique_labels = set(tweet_labels)
 
-# # create dictionary of color codes for each label
-# colors = plt.cm.Spectral(np.linspace(0, 1, len(unique_labels)))
-# color_dict = {label: color for label, color in zip(unique_labels, colors)}
+# create dictionary of color codes for each label
+colors = plt.cm.Spectral(np.linspace(0, 1, len(unique_labels)))
+color_dict = {label: color for label, color in zip(unique_labels, colors)}
 
-# label_dict = {
-#     0: ("#1f77b4", "Analyst Update"),
-#     1: ("#ff7f0e", "Fed | Central Banks"),
-#     2: ("#2ca02c", "Company | Product News"),
-#     3: ("#d62728", "Treasuries | Corporate Debt"),
-#     4: ("#9467bd", "Dividend"),
-#     5: ("#8c564b", "Earnings"),
-#     6: ("#e377c2", "Energy | Oil"),
-#     7: ("#7f7f7f", "Financials"),
-#     8: ("#bcbd22", "Currencies"),
-#     9: ("#17becf", "General News | Opinion"),
-#     10: ("#7f0000", "Gold | Metals | Materials"),
-#     11: ("#aaffc3", "IPO"),
-#     12: ("#ff9de4", "Legal | Regulation"),
-#     13: ("#c7c7c7", "M&A | Investments"),
-#     14: ("#1f77b4", "Macro"),
-#     15: ("#ffbb78", "Markets"),
-#     16: ("#bcbd22", "Politics"),
-#     17: ("#f7b6d2", "Personnel Change"),
-#     18: ("#ff9896", "Stock Commentary"),
-#     19: ("#98df8a", "Stock Movement")
-# }
+label_dict = {
+    0: ("#1f77b4", "Analyst Update"),
+    1: ("#ff7f0e", "Fed | Central Banks"),
+    2: ("#2ca02c", "Company | Product News"),
+    3: ("#d62728", "Treasuries | Corporate Debt"),
+    4: ("#9467bd", "Dividend"),
+    5: ("#8c564b", "Earnings"),
+    6: ("#e377c2", "Energy | Oil"),
+    7: ("#7f7f7f", "Financials"),
+    8: ("#bcbd22", "Currencies"),
+    9: ("#17becf", "General News | Opinion"),
+    10: ("#7f0000", "Gold | Metals | Materials"),
+    11: ("#aaffc3", "IPO"),
+    12: ("#ff9de4", "Legal | Regulation"),
+    13: ("#c7c7c7", "M&A | Investments"),
+    14: ("#1f77b4", "Macro"),
+    15: ("#ffbb78", "Markets"),
+    16: ("#bcbd22", "Politics"),
+    17: ("#f7b6d2", "Personnel Change"),
+    18: ("#ff9896", "Stock Commentary"),
+    19: ("#98df8a", "Stock Movement")
+}
 
-# print("Created labels.")
+print("Created labels.")
 
-# # create scatter plot
-# fig, ax = plt.subplots(figsize=(12,8))
-# for label in unique_labels:
-#     label_words_df = words_df[words_df['label'] == label]
-#     plt.scatter(label_words_df['x'], label_words_df['y'], color=color_dict[label], s=20, alpha=0.5)
+# create scatter plot
+fig, ax = plt.subplots(figsize=(12,8))
+for label in unique_labels:
+    label_words_df = words_df[words_df['label'] == label]
+    plt.scatter(label_words_df['x'], label_words_df['y'], color=color_dict[label], s=20, alpha=0.5)
 
-# # Create key table
-# ax.set_title('Word Clusters by Label')
-# ax.set_xlabel('PCA-1')
-# ax.set_ylabel('PCA-2')
-# handles = [mpatches.Patch(color=color_dict[label], label=label_dict[label][1]) for label in unique_labels]
+# Create key table
+ax.set_title('Word Clusters by Label')
+ax.set_xlabel('PCA-1')
+ax.set_ylabel('PCA-2')
+handles = [mpatches.Patch(color=color_dict[label], label=label_dict[label][1]) for label in unique_labels]
 
-# # Positioning
-# fig.subplots_adjust(left=0.15, right=0.8, bottom=0.15, top=0.85)
-# plt.legend(handles=handles, title="Labels", bbox_to_anchor=(1.00, 1), loc='upper left')
+# Positioning
+fig.subplots_adjust(left=0.15, right=0.8, bottom=0.15, top=0.85)
+plt.legend(handles=handles, title="Labels", bbox_to_anchor=(1.00, 1), loc='upper left')
 
 
-# plt.title('Word Clusters by Label')
-# plt.xlabel('PCA-1')
-# plt.ylabel('PCA-2')
-# plt.savefig('C:/Users/Thomas/Desktop/Projects/FinAI/finai/process_data/word_clusters.png')
-# # plt.show()
+plt.title('Word Clusters by Label')
+plt.xlabel('PCA-1')
+plt.ylabel('PCA-2')
+plt.savefig('C:/Users/Thomas/Desktop/Projects/FinAI/finai/process_data/word_clusters.png')
+# plt.show()
 
 # # ---------------------------------------------
 # #            PINECONE UPSERTING
